@@ -1,7 +1,7 @@
 <?php
-namespace Impactwave\News\Controllers;
+namespace Selene\DemoApp\Controllers;
 
-use Impactwave\News\Models\NewsModel;
+use Selene\DemoApp\Models\NewsModel;
 use Selene\DataObject;
 use Selene\Exceptions\Status;
 use Selene\Modules\Admin\Controllers\AdminController;
@@ -14,7 +14,7 @@ class NewsIndex extends AdminController
     if (!empty ($selection)) {
       $ids = implode (',', $selection);
       database_query ("DELETE FROM " . NewsModel::table () . " WHERE id IN ($ids)");
-      $this->setStatus (Status::INFO, "Os registos foram apagados.");
+      $this->setStatus (Status::INFO, '$ADMIN_MSG_DELETED');
     }
   }
 
@@ -37,11 +37,11 @@ class NewsIndex extends AdminController
           <Checkbox name="sel[]" value="{{ id }}"/>
         </Column>
 
-        <Column width="80" title="Data">
+        <Column width="80" title="$DEMO_DATE">
           {{ date }}
         </Column>
 
-        <Column width="50%" title="Título">
+        <Column width="50%" title="$DEMO_TITLE">
           {{ title }}
         </Column>
 
@@ -49,7 +49,8 @@ class NewsIndex extends AdminController
 
       <Actions>
         <ButtonNew url="{{ !links.mainForm }}">
-          <Button class="btn-danger" action="delete" label="Apagar sel."/>
+          <Button class="btn-danger" action="delete" label="$BUTTON_DELETE" confirm
+                  message="$ADMIN_DELETE_CONFIRM {{ gender }} {{ singular }} / {{ plural }}?"/>
         </ButtonNew>
       </Actions>
     </GridPage>

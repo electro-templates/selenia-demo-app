@@ -1,9 +1,9 @@
 {
   "name": "selene-framework/demo-app",
   "description": "Demonstration Application for the Selene Framework",
-  "type": "selene-plugin",
+  "type": "selene-template",
   "keywords": [
-    "plugin",
+    "template",
     "selene framework"
   ],
   "license": "MIT",
@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Impactwave\\News\\": "src"
+      "Selene\\DemoApp\\": "src"
     }
   }
 }

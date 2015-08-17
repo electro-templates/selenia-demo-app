@@ -1,20 +1,21 @@
 <?php
-use Impactwave\News\NewsModule;
+use Selene\DemoApp\DemoModule;
 
 ModuleOptions (__DIR__, [
   'templates'  => true,
   'views'      => true,
-  'public'     => 'modules/impactwave/news',
-  'routes'     => NewsModule::routes (),
+  'public'     => 'modules/selene-framework/demo-app',
+  'routes'     => DemoModule::routes (),
 //  'publish'    => [],
   'lang'       => true,
 //  'assets'     => [],
   'config'     => [
     'main' => [
       'name'                => 'demoapp',
-      'appName'             => 'Notícias',
-      'title'               => '@ - Notícias',
+      'appName'             => '$DEMO_APP',
+      'title'               => '@ - $DEMO_APP',
       'requireLogin'        => true,
+      'translation'         => true,
     ]
   ],
 //  'components' => [],

@@ -1,11 +1,11 @@
 <?php
-namespace Impactwave\News;
+namespace Selene\DemoApp;
 
-use Impactwave\News\Controllers\Home;
-use Impactwave\News\Controllers\NewsIndex;
-use Impactwave\News\Controllers\NewsForm;
+use Selene\DemoApp\Controllers\Home;
+use Selene\DemoApp\Controllers\NewsIndex;
+use Selene\DemoApp\Controllers\NewsForm;
 
-class NewsModule
+class DemoModule
 {
   static function routes ()
   {
@@ -14,13 +14,13 @@ class NewsModule
       PageRoute ([
         'icon'       => 'fa fa-home',
         'URI'        => '',
-        'title'      => 'Início',
+        'title'      => '$DEMO_HOME',
         'controller' => Home::ref (),
       ]),
 
       PageRoute ([
         'URI'        => 'news',
-        'title'      => 'Notícias',
+        'title'      => '$NEWS_ARTICLES',
         'controller' => NewsIndex::ref (),
         'isIndex'    => true,
         'links'      => [
@@ -30,7 +30,7 @@ class NewsModule
           PageRoute ([
             'URI'        => 'news/{id}',
             'controller' => NewsForm::ref (),
-            'title'      => 'Edit News',
+            'title'      => '$NEWS_ARTICLE',
           ]),
 
         ],

@@ -1,7 +1,7 @@
 <?php
-namespace Impactwave\News\Controllers;
+namespace Selene\DemoApp\Controllers;
 
-use Impactwave\News\Models\NewsModel;
+use Selene\DemoApp\Models\NewsModel;
 use Selene\DataObject;
 use Selene\Modules\Admin\Controllers\AdminController;
 
@@ -18,27 +18,27 @@ class NewsForm extends AdminController
 
       <FormLayout>
 
-        <Field label="Título" name="title">
+        <Field label="$NEWS_TITLE" name="title">
           <Input value="{{ title }}"/>
         </Field>
 
-        <Field label="Data" name="date">
+        <Field label="$NEWS_DATE" name="date">
           <Input type="date" value="{{ date }}"/>
         </Field>
 
-        <Field label="Visível" name="enabled">
+        <Field label="$NEWS_ENABLED" name="enabled">
           <Checkbox checked="{{ enabled }}"/>
         </Field>
 
-        <Field label="Imagem" name="image">
+        <Field label="$NEWS_IMAGE" name="image">
           <ImageField value="{{ image }}"/>
         </Field>
 
-        <Field label="Lead" name="lead">
+        <Field label="$NEWS_LEAD" name="lead">
           <Input class="veryShortText" type="multiline" value="{{ lead }}"/>
         </Field>
 
-        <Field label="Texto" name="text">
+        <Field label="$NEWS_TEXT" name="text">
           <Input class="mediumText" type="multiline" value="{{ text }}"/>
         </Field>
 

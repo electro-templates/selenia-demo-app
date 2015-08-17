@@ -24,12 +24,16 @@ class CreateNews extends AbstractMigration
       ->addColumn ('enabled', 'boolean', ['default' => 0])
       ->create ();
     $now = date ('Y-m-d H:i:s');
-    $this->execute ("
+    /** @noinspection SqlNoDataSourceInspection */
+    $this->execute (<<<SQL
       INSERT INTO news (title, lead, text, date, enabled)
-      VALUES ('Greve dos enfermeiros com menos adesão no Alentejo do que em Lisboa',
-      'Na quinta-feira o protesto chega ao Algarve. Adesão no Alentejo foi de 69%, mas no Hospital do Litoral Alentejano chegou aos 95%.',
-      'A greve dos enfermeiros convocada para esta quarta-feira no Alentejo teve uma adesão de 69%, inferior aos mais de 77% conseguidos no protesto que foi feito na região de Lisboa e Vale do Tejo na terça-feira. Mesmo assim, em unidades como o Hospital do Litoral Alentejano o valor da adesão superou os 95%. Os dados são avançados pelo Sindicato dos Enfermeiros Portugueses (SEP), que explica que na base do descontentamento da classe estão sobretudo questões de desigualdade salarial e de desvalorização da carreira.',
+      VALUES ('Google announces name of Android update',
+      'Google''s update for Android, its mobile operating system, officially has a name: Marshmallow.',
+      'The software, previously only referred to as Android M, was announced in May during Google I/O, the search giant''s annual developer conference.
+      The moniker follows Google''s whimsical naming convention for new versions of Android.
+      The company typically names its software updates alphabetically and after sweets.',
       '$now', 1);
-");
+SQL
+);
   }
 }
