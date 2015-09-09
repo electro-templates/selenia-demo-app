@@ -1,7 +1,7 @@
 <?php
-namespace Selene\DemoApp\Controllers;
+namespace Selenia\Templates\DemoApp\Controllers;
 
-use Selene\Modules\Admin\Controllers\AdminController;
+use Selenia\Modules\Admin\Controllers\AdminController;
 
 class Home extends AdminController
 {

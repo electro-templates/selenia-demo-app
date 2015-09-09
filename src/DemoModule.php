@@ -1,9 +1,9 @@
 <?php
-namespace Selene\DemoApp;
+namespace Selenia\Templates\DemoApp;
 
-use Selene\DemoApp\Controllers\Home;
-use Selene\DemoApp\Controllers\NewsIndex;
-use Selene\DemoApp\Controllers\NewsForm;
+use Selenia\Templates\DemoApp\Controllers\Home;
+use Selenia\Templates\DemoApp\Controllers\NewsIndex;
+use Selenia\Templates\DemoApp\Controllers\NewsForm;
 
 class DemoModule
 {

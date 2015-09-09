@@ -1,10 +1,10 @@
 {
-  "name": "selene-framework/demo-app",
-  "description": "Demonstration Application for the Selene Framework",
-  "type": "selene-template",
+  "name": "selenia-templates/demo-app",
+  "description": "Demonstration application for the Selenia Framework",
+  "type": "selenia-template",
   "keywords": [
     "template",
-    "selene framework"
+    "selenia"
   ],
   "license": "MIT",
   "authors": [
@@ -18,13 +18,14 @@
       "email": "claudio.silva@impactwave.com"
     }
   ],
+  "homepage": "https://github.com/selenia-templates/demo-app",
   "require": {
     "php": ">=5.4.0",
-    "selene-framework/admin-module": "dev-master"
+    "selenia-plugins/admin-interface": "dev-master"
   },
   "autoload": {
     "psr-4": {
-      "Selene\\DemoApp\\": "src"
+      "Selenia\\Templates\\DemoApp\\": "src"
     }
   }
 }

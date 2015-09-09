@@ -1,9 +1,9 @@
 <?php
-namespace Selene\DemoApp\Controllers;
+namespace Selenia\Templates\DemoApp\Controllers;
 
-use Selene\DemoApp\Models\NewsModel;
-use Selene\DataObject;
-use Selene\Modules\Admin\Controllers\AdminController;
+use Selenia\Templates\DemoApp\Models\NewsModel;
+use Selenia\DataObject;
+use Selenia\Modules\Admin\Controllers\AdminController;
 
 class NewsForm extends AdminController
 {

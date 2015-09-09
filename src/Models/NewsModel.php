@@ -1,7 +1,7 @@
 <?php
-namespace Selene\DemoApp\Models;
+namespace Selenia\Templates\DemoApp\Models;
 
-use Selene\DataObject;
+use Selenia\DataObject;
 
 class NewsModel extends DataObject
 {

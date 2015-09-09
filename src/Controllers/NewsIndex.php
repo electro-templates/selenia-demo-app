@@ -1,10 +1,10 @@
 <?php
-namespace Selene\DemoApp\Controllers;
+namespace Selenia\Templates\DemoApp\Controllers;
 
-use Selene\DemoApp\Models\NewsModel;
-use Selene\DataObject;
-use Selene\Exceptions\Status;
-use Selene\Modules\Admin\Controllers\AdminController;
+use Selenia\Templates\DemoApp\Models\NewsModel;
+use Selenia\DataObject;
+use Selenia\Exceptions\Status;
+use Selenia\Modules\Admin\Controllers\AdminController;
 
 class NewsIndex extends AdminController
 {

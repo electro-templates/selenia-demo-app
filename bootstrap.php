@@ -1,10 +1,10 @@
 <?php
-use Selene\DemoApp\DemoModule;
+use Selenia\Templates\DemoApp\DemoModule;
 
 ModuleOptions (__DIR__, [
   'templates'  => true,
   'views'      => true,
-  'public'     => 'modules/selene-framework/demo-app',
+//  'public'     => 'modules/selenia-templates/demo-app',
   'routes'     => DemoModule::routes (),
 //  'publish'    => [],
   'lang'       => true,
