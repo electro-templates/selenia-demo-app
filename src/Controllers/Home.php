@@ -1,7 +1,7 @@
 <?php
-namespace Selenia\Templates\DemoApp\Controllers;
+namespace SeleniaTemplates\DemoApp\Controllers;
 
-use Selenia\Modules\Admin\Controllers\AdminController;
+use Selenia\Plugins\AdminInterface\Controllers\AdminController;
 
 class Home extends AdminController
 {

@@ -1,5 +1,5 @@
 <?php
-use Selenia\Templates\DemoApp\DemoModule;
+use SeleniaTemplates\DemoApp\DemoModule;
 
 ModuleOptions (__DIR__, [
   'templates'  => true,

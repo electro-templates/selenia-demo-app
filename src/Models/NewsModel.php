@@ -1,5 +1,5 @@
 <?php
-namespace Selenia\Templates\DemoApp\Models;
+namespace SeleniaTemplates\DemoApp\Models;
 
 use Selenia\DataObject;
 
