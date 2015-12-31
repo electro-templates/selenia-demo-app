@@ -9,14 +9,18 @@ class NewsModel extends DataObject
   public $enabled;
   public $id;
   public $image;
-  public $lead;
-  public $text;
-  public $title;
+  public $file;
+  public $lead_pt;
+  public $text_pt;
+  public $title_pt;
+  public $lead_en;
+  public $text_en;
+  public $title_en;
 
   public $primaryKeyName    = 'id';
   public $tableName         = 'news';
   public $fieldNames        = [
-    'id', 'title', 'lead', 'text', 'date', 'image', 'enabled',
+    'id', 'title_pt', 'lead_pt', 'text_pt', 'title_en', 'lead_en', 'text_en', 'date', 'image', 'file', 'enabled',
   ];
   public $booleanFields     = ['enabled'];
   public $primarySortField  = 'date DESC';
@@ -24,4 +28,5 @@ class NewsModel extends DataObject
   public $singular          = '$NEWS_ARTICLE';
   public $plural            = '$NEWS_ARTICLES';
   public $imageFields       = ['image'];
+  public $fileFields        = ['file'];
 }

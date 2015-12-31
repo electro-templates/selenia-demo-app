@@ -1,56 +1,60 @@
 <?php
 namespace SeleniaTemplates\DemoApp\Controllers;
 
+use Selenia\Plugins\AdminInterface\Components\AdminPageComponent;
 use SeleniaTemplates\DemoApp\Models\NewsModel;
-use Selenia\DataObject;
-use Selenia\Exceptions\Status;
-use Selenia\Plugins\AdminInterface\Controllers\AdminController;
 
-class NewsIndex extends AdminController
+class NewsIndex extends AdminPageComponent
 {
-  function action_delete (DataObject $data = null, $param = null)
+  function action_delete ($param = null)
   {
-    $selection = param ('sel');
-    if (!empty ($selection)) {
+    $data      = $this->request->getParsedBody ();
+    $selection = get ($data, 'sel');
+    if ($selection) {
       $ids = implode (',', $selection);
       database_query ("DELETE FROM " . NewsModel::table () . " WHERE id IN ($ids)");
-      $this->setStatus (Status::INFO, '$ADMIN_MSG_DELETED');
+      $this->session->flashMessage ('$ADMIN_MSG_DELETED');
     }
   }
 
   protected function model ()
   {
-    return (new NewsModel)->all ();
+    $this->modelInfo = new NewsModel;
+    return $this->modelInfo->all ();
   }
 
   protected function render ()
   { ?>
     <GridPage>
 
-      <DataGrid data="{{ !default }}" onClickGoTo="{{ !links.mainForm }}">
+      <DataGrid data="{{ model }}" as="i:r" onClickGoTo="{{ navigation.newsForm }}{{ r.id }}">
 
         <Column width="40" type="row-selector">
-          {{ #ord }}
+          {{ i|ord }}
         </Column>
 
         <Column width="30" type="input" align="center">
-          <Checkbox name="sel[]" value="{{ id }}"/>
+          <Checkbox name="sel[]" value="{{ r.id }}"/>
         </Column>
 
         <Column width="80" title="$DEMO_DATE">
-          {{ date }}
+          {{ r.date }}
         </Column>
 
         <Column width="50%" title="$DEMO_TITLE">
-          {{ title }}
+          {{ r.title_pt }}
         </Column>
 
       </DataGrid>
 
       <Actions>
-        <ButtonNew url="{{ !links.mainForm }}">
-          <Button class="btn-danger" action="delete" label="$BUTTON_DELETE" confirm
-                  message="$ADMIN_DELETE_CONFIRM {{ gender }} {{ singular }} / {{ plural }}?"/>
+        <ButtonNew url="{{ navigation.newsForm }}">
+          <Button class="btn-danger"
+                  action="delete"
+                  label="$BUTTON_DELETE"
+                  disabled="{{ !model }}"
+                  confirm
+                  message="$ADMIN_DELETE_CONFIRM {{ modelInfo.gender }} {{ modelInfo.singular }} / {{ modelInfo.plural }}?"/>
         </ButtonNew>
       </Actions>
     </GridPage>

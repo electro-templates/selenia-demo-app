@@ -1,15 +1,15 @@
 <?php
 namespace SeleniaTemplates\DemoApp\Controllers;
 
-use Selenia\Plugins\AdminInterface\Controllers\AdminController;
+use Selenia\Http\Components\PageComponent;
 
-class Home extends AdminController
+class Home extends PageComponent
 {
   protected function render ()
   { ?>
     <Admin>
 
-      $DEMO_WELCOME
+      <p>$DEMO_WELCOME</p>
 
     </Admin>
     <?php

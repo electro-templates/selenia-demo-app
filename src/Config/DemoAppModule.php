@@ -1,15 +1,16 @@
 <?php
 namespace SeleniaTemplates\DemoApp\Config;
 
-use App\Welcome\Controllers\Index;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Selenia\Core\Assembly\Services\ModuleServices;
-use Selenia\Http\Components\PageComponent;
 use Selenia\Interfaces\Http\RouterInterface;
 use Selenia\Interfaces\ModuleInterface;
 use Selenia\Interfaces\Navigation\NavigationInterface;
 use Selenia\Interfaces\Navigation\NavigationProviderInterface;
+use SeleniaTemplates\DemoApp\Controllers\Home;
+use SeleniaTemplates\DemoApp\Controllers\NewsForm;
+use SeleniaTemplates\DemoApp\Controllers\NewsIndex;
 
 class DemoAppModule implements ModuleInterface, NavigationProviderInterface
 {
@@ -20,18 +21,10 @@ class DemoAppModule implements ModuleInterface, NavigationProviderInterface
   {
     return $this->router
       ->set ([
+        '.' => Home::class,
 
-        // Example route implementing a self-contained component-like controller.
-
-        '.' => Index::class,
-
-        // Example route using an automatic controller and an external view.
-
-        'example' => factory (function (PageComponent $page) {
-          $page->templateUrl = 'index.html';
-          return $page;
-        }),
-
+        'news'     => NewsIndex::class,
+        'news/@id' => NewsForm::class,
       ])
       ->__invoke ($request, $response, $next);
   }
@@ -40,16 +33,14 @@ class DemoAppModule implements ModuleInterface, NavigationProviderInterface
   {
     $this->router = $router;
     $module
-      ->publishPublicDirAs ('modules/selenia/welcome')
-      ->provideMacros ()
-      ->provideViews ()
       ->registerRouter ($this)
       ->provideNavigation ($this)
+      ->provideTranslations ()
       ->setDefaultConfig ([
         'main' => [
-          'name'    => 'site',              // session cookie name
-          'appName' => 'Your App',
-          'title'   => '@ - Your App',      // @ = page title
+          'name'    => 'demoapp',       // session cookie name
+          'appName' => '$DEMO_APP',
+          'title'   => '@ - $DEMO_APP', // @ = page title
         ],
       ]);
   }
@@ -57,14 +48,20 @@ class DemoAppModule implements ModuleInterface, NavigationProviderInterface
   function defineNavigation (NavigationInterface $navigation)
   {
     $navigation->add ([
-      '' => $navigation
+      ''     => $navigation
         ->link ()
         ->id ('home')
-        ->title ('Welcome')
+        ->title ('$DEMO_HOME')
+        ->icon ('fa fa-home'),
+      'news' => $navigation
+        ->link ()
+        ->title ('$NEWS_ARTICLES')
+        ->icon ('fa fa-file-text')
         ->links ([
-          'example' => $navigation
+          '@id' => $navigation
             ->link ()
-            ->title ('Example'),
+            ->id ('newsForm')
+            ->title ('$NEWS_ARTICLE'),
         ]),
     ]);
   }

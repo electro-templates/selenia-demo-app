@@ -1,15 +1,14 @@
 <?php
 namespace SeleniaTemplates\DemoApp\Controllers;
 
+use Selenia\Plugins\AdminInterface\Components\AdminPageComponent;
 use SeleniaTemplates\DemoApp\Models\NewsModel;
-use Selenia\DataObject;
-use Selenia\Plugins\AdminInterface\Controllers\AdminController;
 
-class NewsForm extends AdminController
+class NewsForm extends AdminPageComponent
 {
   protected function model ()
   {
-    return $this->loadRequested(new NewsModel);
+    return $this->loadRequested (new NewsModel);
   }
 
   protected function render ()
@@ -18,34 +17,34 @@ class NewsForm extends AdminController
 
       <FormLayout>
 
-        <Field label="$NEWS_TITLE" name="title">
-          <Input value="{{ title }}"/>
+        <Field label="$DEMO_TITLE" name="title">
+          <Input value="{{ model.title }}"/>
         </Field>
 
-        <Field label="$NEWS_DATE" name="date">
-          <Input type="date" value="{{ date }}"/>
+        <Field label="$DEMO_DATE" name="date">
+          <Input type="date" value="{{ model.date }}"/>
         </Field>
 
-        <Field label="$NEWS_ENABLED" name="enabled">
-          <Checkbox checked="{{ enabled }}"/>
+        <Field label="$DEMO_ENABLED" name="enabled">
+          <Checkbox checked="{{ model.enabled }}"/>
         </Field>
 
-        <Field label="$NEWS_IMAGE" name="image">
-          <ImageField value="{{ image }}"/>
+        <Field label="$DEMO_IMAGE" name="image">
+          <ImageField value="{{ model.image }}"/>
         </Field>
 
-        <Field label="$NEWS_LEAD" name="lead">
-          <Input class="veryShortText" type="multiline" value="{{ lead }}"/>
+        <Field label="$DEMO_LEAD" name="lead">
+          <Input class="veryShortText" type="multiline" value="{{ model.lead }}"/>
         </Field>
 
-        <Field label="$NEWS_TEXT" name="text">
-          <Input class="mediumText" type="multiline" value="{{ text }}"/>
+        <Field label="$DEMO_TEXT" name="text">
+          <Input class="mediumText" type="multiline" value="{{ model.text }}"/>
         </Field>
 
       </FormLayout>
 
       <Actions>
-        <ButtonsSaveDelete key="{{ id }}"/>
+        <ButtonsSaveDelete key="{{ model.id }}" model="user"/>
       </Actions>
     </FormPage>
 
