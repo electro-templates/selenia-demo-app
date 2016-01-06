@@ -3,6 +3,7 @@ namespace SeleniaTemplates\DemoApp\Config;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Selenia\Authentication\Middleware\AuthenticationMiddleware;
 use Selenia\Core\Assembly\Services\ModuleServices;
 use Selenia\Interfaces\Http\RouterInterface;
 use Selenia\Interfaces\ModuleInterface;
@@ -21,10 +22,13 @@ class DemoAppModule implements ModuleInterface, NavigationProviderInterface
   {
     return $this->router
       ->set ([
-        '.' => Home::class,
+        '.' => [AuthenticationMiddleware::class, Home::class],
 
-        'news'     => NewsIndex::class,
-        'news/@id' => NewsForm::class,
+        'news' => [
+          AuthenticationMiddleware::class,
+          '.'        => NewsIndex::class,
+          'news/@id' => NewsForm::class,
+        ],
       ])
       ->__invoke ($request, $response, $next);
   }

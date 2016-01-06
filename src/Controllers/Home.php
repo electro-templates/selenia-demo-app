@@ -1,9 +1,9 @@
 <?php
 namespace SeleniaTemplates\DemoApp\Controllers;
 
-use Selenia\Http\Components\PageComponent;
+use Selenia\Plugins\AdminInterface\Components\AdminPageComponent;
 
-class Home extends PageComponent
+class Home extends AdminPageComponent
 {
   protected function render ()
   { ?>
