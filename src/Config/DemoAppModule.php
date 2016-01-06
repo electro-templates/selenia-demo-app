@@ -38,9 +38,10 @@ class DemoAppModule implements ModuleInterface, NavigationProviderInterface
       ->provideTranslations ()
       ->setDefaultConfig ([
         'main' => [
-          'name'    => 'demoapp',       // session cookie name
-          'appName' => '$DEMO_APP',
-          'title'   => '@ - $DEMO_APP', // @ = page title
+          'name'        => 'demoapp',       // session cookie name
+          'appName'     => '$DEMO_APP',
+          'title'       => '@ - $DEMO_APP', // @ = page title
+          'translation' => true,
         ],
       ]);
   }
