@@ -7,11 +7,13 @@ class Home extends AdminPageComponent
 {
   protected function render ()
   { ?>
-    <Admin>
+    <Content of="main">
 
       <p>$DEMO_WELCOME</p>
 
-    </Admin>
+    </Content>
+
+    <Include view="layouts/main.html"/>
     <?php
   }
 

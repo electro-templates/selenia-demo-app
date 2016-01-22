@@ -5,40 +5,50 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Selenia\Authentication\Middleware\AuthenticationMiddleware;
 use Selenia\Core\Assembly\Services\ModuleServices;
+use Selenia\Interfaces\Http\RequestHandlerInterface;
 use Selenia\Interfaces\Http\RouterInterface;
 use Selenia\Interfaces\ModuleInterface;
 use Selenia\Interfaces\Navigation\NavigationInterface;
 use Selenia\Interfaces\Navigation\NavigationProviderInterface;
+use Selenia\Plugins\AdminInterface\Config\AdminInterfaceSettings;
 use SeleniaTemplates\DemoApp\Controllers\Home;
 use SeleniaTemplates\DemoApp\Controllers\NewsForm;
 use SeleniaTemplates\DemoApp\Controllers\NewsIndex;
 
-class DemoAppModule implements ModuleInterface, NavigationProviderInterface
+class DemoAppModule implements ModuleInterface, RequestHandlerInterface, NavigationProviderInterface
 {
+  /** @var AdminInterfaceSettings */
+  private $adminSettings;
   /** @var RouterInterface */
   private $router;
 
   function __invoke (ServerRequestInterface $request, ResponseInterface $response, callable $next)
   {
+    $base = $this->adminSettings->urlPrefix ();
+    if ($base == '') $base = '*';
+    else $base = "$base...";
     return $this->router
       ->set ([
-        '.' => [AuthenticationMiddleware::class, Home::class],
-
-        'news' => [
+        '.'   => [
+          AuthenticationMiddleware::class, Home::class,
+        ],
+        $base => [
           AuthenticationMiddleware::class,
-          '.'        => NewsIndex::class,
-          'news/@id' => NewsForm::class,
+
+          'news...' => [
+            '.'   => NewsIndex::class,
+            '@id' => NewsForm::class,
+          ],
         ],
       ])
       ->__invoke ($request, $response, $next);
   }
 
-  function configure (ModuleServices $module, RouterInterface $router)
+  function configure (ModuleServices $module, RouterInterface $router, AdminInterfaceSettings $adminSettings)
   {
-    $this->router = $router;
+    $this->router        = $router;
+    $this->adminSettings = $adminSettings;
     $module
-      ->registerRouter ($this)
-      ->provideNavigation ($this)
       ->provideTranslations ()
       ->setDefaultConfig ([
         'main' => [
@@ -47,28 +57,34 @@ class DemoAppModule implements ModuleInterface, NavigationProviderInterface
           'title'       => '@ - $DEMO_APP', // @ = page title
           'translation' => true,
         ],
-      ]);
+      ])
+      ->onPostConfig (function () use ($module) {
+        $module
+          ->registerRouter ($this)
+          ->provideNavigation ($this);
+      });
   }
 
   function defineNavigation (NavigationInterface $navigation)
   {
     $navigation->add ([
-      ''     => $navigation
-        ->link ()
-        ->id ('home')
-        ->title ('$DEMO_HOME')
-        ->icon ('fa fa-home'),
-      'news' => $navigation
-        ->link ()
-        ->title ('$NEWS_ARTICLES')
-        ->icon ('fa fa-file-text')
+      '' => $navigation
+        ->group ()
+        ->title ('$DEMO_APP')
+        ->icon ('fa fa-home')
         ->links ([
-          '@id' => $navigation
+          'news' => $navigation
             ->link ()
-            ->id ('newsForm')
-            ->title ('$NEWS_ARTICLE'),
+            ->title ('$NEWS_ARTICLES')
+            ->icon ('fa fa-file-text')
+            ->links ([
+              '@id' => $navigation
+                ->link ()
+                ->id ('newsForm')
+                ->title ('$NEWS_ARTICLE'),
+            ]),
         ]),
-    ]);
+    ], true, 'app_home');
   }
 
 }
