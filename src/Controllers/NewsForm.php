@@ -44,7 +44,7 @@ class NewsForm extends AdminPageComponent
       </FormLayout>
 
       <Actions>
-        <ButtonsSaveDelete key="{{ model.id }}" model="user"/>
+        <ButtonsSaveDelete model="{{ model }}" key="{{ model.id }}"/>
       </Actions>
     </FormPage>
 

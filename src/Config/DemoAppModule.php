@@ -29,16 +29,12 @@ class DemoAppModule implements ModuleInterface, RequestHandlerInterface, Navigat
     else $base = "$base...";
     return $this->router
       ->set ([
-        '.'   => [
-          AuthenticationMiddleware::class, Home::class,
-        ],
         $base => [
           AuthenticationMiddleware::class,
 
-          'news...' => [
-            '.'   => NewsIndex::class,
-            '@id' => NewsForm::class,
-          ],
+          '.'        => Home::class,
+          'news'     => NewsIndex::class,
+          'news/@id' => NewsForm::class,
         ],
       ])
       ->__invoke ($request, $response, $next);

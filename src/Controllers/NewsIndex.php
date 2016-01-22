@@ -54,7 +54,7 @@ class NewsIndex extends AdminPageComponent
                   label="$BUTTON_DELETE"
                   disabled="{{ !model }}"
                   confirm
-                  message="$ADMIN_DELETE_CONFIRM {{ modelInfo.gender }} {{ modelInfo.singular }} / {{ modelInfo.plural }}?"/>
+                  message="$APP_DELETE_CONFIRM {{ modelInfo.gender }} {{ modelInfo.singular }} / {{ modelInfo.plural }}?"/>
         </ButtonNew>
       </Actions>
     </GridPage>
