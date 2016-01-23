@@ -3,6 +3,7 @@ namespace SeleniaTemplates\DemoApp\Config;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Selenia\Application;
 use Selenia\Authentication\Middleware\AuthenticationMiddleware;
 use Selenia\Core\Assembly\Services\ModuleServices;
 use Selenia\Interfaces\Http\RequestHandlerInterface;
@@ -40,20 +41,17 @@ class DemoAppModule implements ModuleInterface, RequestHandlerInterface, Navigat
       ->__invoke ($request, $response, $next);
   }
 
-  function configure (ModuleServices $module, RouterInterface $router, AdminInterfaceSettings $adminSettings)
+  function configure (ModuleServices $module, RouterInterface $router, AdminInterfaceSettings $adminSettings,
+                      Application $app)
   {
     $this->router        = $router;
     $this->adminSettings = $adminSettings;
+    $app->name           = 'demoapp';       // session cookie name
+    $app->appName        = '$DEMO_APP';     // default page title; also displayed on title bar (optional)
+    $app->title          = '@ - $DEMO_APP'; // @ = page title
+    $app->translation    = true;
     $module
       ->provideTranslations ()
-      ->setDefaultConfig ([
-        'main' => [
-          'name'        => 'demoapp',       // session cookie name
-          'appName'     => '$DEMO_APP',
-          'title'       => '@ - $DEMO_APP', // @ = page title
-          'translation' => true,
-        ],
-      ])
       ->onPostConfig (function () use ($module) {
         $module
           ->registerRouter ($this)
