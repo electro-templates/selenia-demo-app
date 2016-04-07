@@ -5,8 +5,7 @@ use Selenia\Plugins\AdminInterface\Components\AdminPageComponent;
 
 class Home extends AdminPageComponent
 {
-  protected function render ()
-  { ?>
+  public $template = <<<'HTML'
     <Content of="main">
 
       <p>$DEMO_WELCOME</p>
@@ -14,7 +13,6 @@ class Home extends AdminPageComponent
     </Content>
 
     <Include view="layouts/main.html"/>
-    <?php
-  }
+HTML;
 
 }

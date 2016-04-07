@@ -6,25 +6,7 @@ use SeleniaTemplates\DemoApp\Models\NewsModel;
 
 class NewsIndex extends AdminPageComponent
 {
-  function action_delete ($param = null)
-  {
-    $data      = $this->request->getParsedBody ();
-    $selection = get ($data, 'sel');
-    if ($selection) {
-      $ids = implode (',', $selection);
-      database_query ("DELETE FROM " . NewsModel::table () . " WHERE id IN ($ids)");
-      $this->session->flashMessage ('$ADMIN_MSG_DELETED');
-    }
-  }
-
-  protected function model ()
-  {
-    $this->modelInfo = new NewsModel;
-    return $this->modelInfo->all ();
-  }
-
-  protected function render ()
-  { ?>
+  public $template = <<<'HTML'
     <GridPage>
 
       <DataGrid data="{{ model }}" as="i:r" onClickGoTo="{{ navigation.newsForm }}{{ r.id }}">
@@ -58,8 +40,23 @@ class NewsIndex extends AdminPageComponent
         </ButtonNew>
       </Actions>
     </GridPage>
+HTML;
 
-    <?php
+  function action_delete ($param = null)
+  {
+    $data      = $this->request->getParsedBody ();
+    $selection = get ($data, 'sel');
+    if ($selection) {
+      $ids = implode (',', $selection);
+      database_query ("DELETE FROM " . NewsModel::table () . " WHERE id IN ($ids)");
+      $this->session->flashMessage ('$ADMIN_MSG_DELETED');
+    }
+  }
+
+  protected function model ()
+  {
+    $this->modelInfo = new NewsModel;
+    return $this->modelInfo->all ();
   }
 
 }

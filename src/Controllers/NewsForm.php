@@ -6,13 +6,7 @@ use SeleniaTemplates\DemoApp\Models\NewsModel;
 
 class NewsForm extends AdminPageComponent
 {
-  protected function model ()
-  {
-    return $this->loadRequested (new NewsModel);
-  }
-
-  protected function render ()
-  { ?>
+  public $template = <<<'HTML'
     <FormPage>
 
       <FormLayout>
@@ -47,8 +41,10 @@ class NewsForm extends AdminPageComponent
         <ButtonsSaveDelete model="{{ model }}" key="{{ model.id }}"/>
       </Actions>
     </FormPage>
+HTML;
 
-    <?php
+  protected function model ()
+  {
+    return $this->loadRequested (new NewsModel);
   }
-
 }

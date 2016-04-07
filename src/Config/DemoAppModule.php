@@ -55,7 +55,7 @@ class DemoAppModule implements ModuleInterface, RequestHandlerInterface, Navigat
       ->onPostConfig (function () use ($module) {
         $module
           ->registerRouter ($this)
-          ->provideNavigation ($this);
+          ->registerNavigation ($this);
       });
   }
 
