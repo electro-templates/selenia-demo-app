@@ -1,6 +1,6 @@
 # demo-app
 
-##### Demonstration Application for the Selenia Platform
+##### Demonstration Application made with Selenia
 
 This simple application will be installed as a project module into your application's `private/modules` folder.
 
