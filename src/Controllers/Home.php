@@ -12,7 +12,7 @@ class Home extends AdminPageComponent
 
     </Content>
 
-    <Include view="layouts/main.html"/>
+    <Include view="adminInterface/layouts/main.html"/>
 HTML;
 
 }

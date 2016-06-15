@@ -9,36 +9,36 @@ class NewsIndex extends AdminPageComponent
   public $template = <<<'HTML'
     <GridPage>
 
-      <DataGrid data="{{ model }}" as="i:r" onClickGoTo="{{ navigation.newsForm }}{{ r.id }}">
+      <DataGrid data={model} as="i:r" onClickGoTo="{navigation.newsForm + r.id}">
 
         <Column width="40" type="row-selector">
-          {{ i|ord }}
+          {i|ord}
         </Column>
 
         <Column width="30" type="input" align="center">
-          <Checkbox name="sel[]" value="{{ r.id }}"/>
+          <Checkbox name="sel[]" value="{r.id}"/>
         </Column>
 
         <Column width="80" title="$DEMO_DATE">
-          {{ r.date }}
+          {r.date}
         </Column>
 
-        <Column width="50%" title="$DEMO_TITLE">
-          {{ r.title_pt }}
+        <Column width="100%" title="$DEMO_TITLE">
+          {r.title_pt}
         </Column>
 
-      </DataGrid>
-
-      <Actions>
-        <ButtonNew url="{{ navigation.newsForm }}">
+        <Actions>
+          <ButtonNew url="{navigation.newsForm}"/>
           <Button class="btn-danger"
                   action="delete"
                   label="$BUTTON_DELETE"
-                  disabled="{{ !model }}"
+                  disabled="{!model}"
                   confirm
-                  message="$APP_DELETE_CONFIRM {{ modelInfo.gender }} {{ modelInfo.singular }} / {{ modelInfo.plural }}?"/>
-        </ButtonNew>
-      </Actions>
+                  message="{'$APP_DELETE_CONFIRM' + modelInfo.gender + ' ' + modelInfo.singular + ' / ' + modelInfo.plural + '?'}"/>
+        </Actions>
+  
+      </DataGrid>
+Hey:{navigation.newsForm}
     </GridPage>
 HTML;
 
@@ -55,8 +55,7 @@ HTML;
 
   protected function model ()
   {
-    $this->modelInfo = new NewsModel;
-    return $this->modelInfo->all ();
+    $this->modelController->setModel (NewsModel::all ());
   }
 
 }

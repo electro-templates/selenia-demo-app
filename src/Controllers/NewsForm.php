@@ -12,39 +12,39 @@ class NewsForm extends AdminPageComponent
       <FormLayout>
 
         <Field label="$DEMO_TITLE" name="title">
-          <Input value="{{ model.title }}"/>
+          <Input value="{model.title}"/>
         </Field>
 
         <Field label="$DEMO_DATE" name="date">
-          <Input type="date" value="{{ model.date }}"/>
+          <Input type="date" value="{model.date}"/>
         </Field>
 
         <Field label="$DEMO_ENABLED" name="enabled">
-          <Checkbox checked="{{ model.enabled }}"/>
+          <Checkbox checked="{model.enabled}"/>
         </Field>
 
         <Field label="$DEMO_IMAGE" name="image">
-          <ImageField value="{{ model.image }}"/>
+          <ImageField value="{model.image}"/>
         </Field>
 
         <Field label="$DEMO_LEAD" name="lead">
-          <Input class="veryShortText" type="multiline" value="{{ model.lead }}"/>
+          <Input class="veryShortText" type="multiline" value="{model.lead}"/>
         </Field>
 
         <Field label="$DEMO_TEXT" name="text">
-          <Input class="mediumText" type="multiline" value="{{ model.text }}"/>
+          <Input class="mediumText" type="multiline" value="{model.text}"/>
         </Field>
 
       </FormLayout>
 
       <Actions>
-        <ButtonsSaveDelete model="{{ model }}" key="{{ model.id }}"/>
+        <ButtonsSaveDelete model="{model}" key="{model.id}"/>
       </Actions>
     </FormPage>
 HTML;
 
   protected function model ()
   {
-    return $this->loadRequested (new NewsModel);
+    $this->modelController->setModel (NewsModel::findOrFail ($this->request->getAttribute('@id')));
   }
 }
