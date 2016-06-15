@@ -1,6 +1,6 @@
 {
   "name": "selenia-templates/demo-app",
-  "description": "Demonstration application for the Selenia Framework",
+  "description": "Demonstration application made with Selenia",
   "type": "selenia-template",
   "keywords": [
     "template",
