@@ -1,9 +1,10 @@
 {
-  "name": "selenia-templates/demo-app",
+  "name": "electro-templates/selenia-demo-app",
   "description": "Demonstration application made with Selenia",
-  "type": "selenia-template",
+  "type": "electro-template",
   "keywords": [
     "template",
+    "electro",
     "selenia"
   ],
   "license": "MIT",
@@ -18,11 +19,11 @@
       "email": "claudio.silva@impactwave.com"
     }
   ],
-  "homepage": "https://github.com/selenia-templates/demo-app",
+  "homepage": "https://github.com/electro-templates/selenia-demo-app",
   "require": {
     "php": ">=5.4.0",
-    "selenia-plugins/admin-interface": "dev-master",
-    "selenia-plugins/login": "dev-master"
+    "selenia/platform": "dev-master",
+    "selenia/login": "dev-master"
   },
   "autoload": {
     "psr-4": {
