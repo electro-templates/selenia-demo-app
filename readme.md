@@ -11,7 +11,7 @@ Git with it.
 
 To install this template on your application, using the terminal, `cd` to your app's directory and type:
 
-``bash
+```bash
 workman module:install-template selenia-templates/demo-app
 ```
 
