@@ -1,6 +1,6 @@
 # demo-app
 
-##### Demonstration Application for the Selenia Framework
+##### Demonstration Application for the Selenia Platform
 
 This simple application will be installed as a project module into your application's `private/modules` folder.
 
@@ -11,20 +11,14 @@ Git with it.
 
 To install this template on your application, using the terminal, `cd` to your app's directory and type:
 
-```shell
-selenia module:install-template
+``bash
+workman module:install-template selenia-templates/demo-app
 ```
 
-and select `selenia-templates/demo-app` from the displayed list, or type
-
-```shell
-selenia module:install-plugin selenia-templates/demo-app
-```
-
-> **Warning**: this package cannot be installed with Composer. You must use the `selenia` CLI.
+> **Warning**: this package cannot be installed with Composer. You must use the `workman` CLI.
 
 ## License
 
-The Selenia framework is open-source software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+The Selenia Platform is open-source software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
-**Selenia framework** - Copyright &copy; 2015 Impactwave, Lda.
+**Selenia Platform** - Copyright &copy; Impactwave, Lda.
