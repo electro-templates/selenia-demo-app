@@ -16,7 +16,7 @@ use SeleniaTemplates\DemoApp\Controllers\Home;
 use SeleniaTemplates\DemoApp\Controllers\NewsForm;
 use SeleniaTemplates\DemoApp\Controllers\NewsIndex;
 
-class DemoAppModule implements ModuleInterface, RequestHandlerInterface, NavigationProviderInterface
+class DemoAppTemplateModule implements ModuleInterface, RequestHandlerInterface, NavigationProviderInterface
 {
   /** @var AdminInterfaceSettings */
   private $adminSettings;
