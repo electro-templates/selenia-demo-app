@@ -21,9 +21,9 @@
   ],
   "homepage": "https://github.com/selenia-modules/demo-app-template",
   "require": {
-    "php": ">=5.6.0",
+    "php": ">=5.6",
     "selenia/platform": "dev-master",
-    "selenia/login": "dev-master"
+    "selenia-modules/login": "dev-master"
   },
   "autoload": {
     "psr-4": {

@@ -1,7 +1,7 @@
 <?php
 namespace SeleniaTemplates\DemoApp\Controllers;
 
-use Selenia\Plugins\AdminInterface\Components\AdminPageComponent;
+use Selenia\Platform\Components\AdminPageComponent;
 use SeleniaTemplates\DemoApp\Models\NewsModel;
 
 class NewsIndex extends AdminPageComponent

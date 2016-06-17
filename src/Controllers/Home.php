@@ -1,7 +1,7 @@
 <?php
 namespace SeleniaTemplates\DemoApp\Controllers;
 
-use Selenia\Plugins\AdminInterface\Components\AdminPageComponent;
+use Selenia\Platform\Components\AdminPageComponent;
 
 class Home extends AdminPageComponent
 {
