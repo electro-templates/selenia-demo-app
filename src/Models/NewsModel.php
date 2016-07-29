@@ -1,10 +1,13 @@
 <?php
 namespace SeleniaTemplates\DemoApp\Models;
 
+use Electro\Plugins\MatisseComponents\Traits\FilesModelTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class NewsModel extends Model
 {
+  use FilesModelTrait;
+
   public $table = 'news';
 
 //  public $date;

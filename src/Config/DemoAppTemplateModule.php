@@ -11,21 +11,21 @@ use Electro\Interfaces\Http\RouterInterface;
 use Electro\Interfaces\ModuleInterface;
 use Electro\Interfaces\Navigation\NavigationInterface;
 use Electro\Interfaces\Navigation\NavigationProviderInterface;
-use Electro\Platform\Config\PlatformSettings;
+use Selenia\Platform\Config\PlatformSettings;
 use SeleniaTemplates\DemoApp\Controllers\Home;
 use SeleniaTemplates\DemoApp\Controllers\NewsForm;
 use SeleniaTemplates\DemoApp\Controllers\NewsIndex;
 
 class DemoAppTemplateModule implements ModuleInterface, RequestHandlerInterface, NavigationProviderInterface
 {
-  /** @var AdminInterfaceSettings */
-  private $adminSettings;
+  /** @var PlatformSettings */
+  private $platformSettings;
   /** @var RouterInterface */
   private $router;
 
   function __invoke (ServerRequestInterface $request, ResponseInterface $response, callable $next)
   {
-    $base = $this->adminSettings->urlPrefix ();
+    $base = $this->platformSettings->urlPrefix ();
     if ($base == '') $base = '*';
     else $base = "$base...";
     return $this->router
@@ -41,15 +41,15 @@ class DemoAppTemplateModule implements ModuleInterface, RequestHandlerInterface,
       ->__invoke ($request, $response, $next);
   }
 
-  function configure (ModuleServices $module, RouterInterface $router, AdminInterfaceSettings $adminSettings,
+  function configure (ModuleServices $module, RouterInterface $router, PlatformSettings $platformSettings,
                       Application $app)
   {
-    $this->router        = $router;
-    $this->adminSettings = $adminSettings;
-    $app->name           = 'demoapp';       // session cookie name
-    $app->appName        = '$DEMO_APP';     // default page title; also displayed on title bar (optional)
-    $app->title          = '@ - $DEMO_APP'; // @ = page title
-    $app->translation    = true;
+    $this->router           = $router;
+    $this->platformSettings = $platformSettings;
+    $app->name              = 'demoapp';       // session cookie name
+    $app->appName           = '$DEMO_APP';     // default page title; also displayed on title bar (optional)
+    $app->title             = '@ - $DEMO_APP'; // @ = page title
+    $app->translation       = true;
     $module
       ->provideTranslations ()
       ->onPostConfig (function () use ($module) {
