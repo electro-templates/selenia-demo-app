@@ -1,37 +1,53 @@
 <?php
-
-use Phinx\Migration\AbstractMigration;
+use Electro\Plugins\IlluminateDatabase\AbstractMigration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateNews extends AbstractMigration
 {
   /**
-   * Change Method.
+   * Reverse the migration.
    *
-   * Write your reversible migrations using this method.
-   *
-   * More information on writing migrations is available here:
-   * http://docs.phinx.org/en/latest/migrations.html#the-abstractmigration-class
+   * @return void
    */
-  public function change ()
+  function down ()
   {
-    $this
-      ->table ('news')
-      ->addColumn ('title_pt', 'string', ['limit' => 30])
-      ->addColumn ('title_en', 'string', ['limit' => 30])
-      ->addColumn ('lead_pt', 'string', ['limit' => 200])
-      ->addColumn ('lead_en', 'string', ['limit' => 200])
-      ->addColumn ('text_pt', 'string', ['limit' => 5000])
-      ->addColumn ('text_en', 'string', ['limit' => 5000])
-      ->addColumn ('date', 'datetime')
-      ->addColumn ('image', 'string', ['limit' => 60])
-      ->addColumn ('file', 'string', ['limit' => 60])
-      ->addColumn ('enabled', 'boolean', ['default' => 0])
-      ->addIndex('date')
-      ->addIndex('enabled')
-      ->create ();
-    $now = date ('Y-m-d H:i:s');
-    /** @noinspection SqlNoDataSourceInspection */
-    $this->execute (<<<SQL
+    $schema = $this->db->schema ();
+
+    if ($this->db->hasTable ('news')) {
+      $schema->drop ('news');
+      $this->output->writeln ("  Dropped table <info>news</info>.");
+    }
+    else $this->output->writeln (" == Table <info>news</info> doesn't exist. Skipped.");
+  }
+
+  /**
+   * Run the migration.
+   *
+   * @return void
+   */
+  public function up ()
+  {
+    $schema = $this->db->schema ();
+
+    if (!$this->db->hasTable ('news')) {
+      $schema->create ('news', function (Blueprint $t) {
+        $t->increments ('id');
+        $t->string ('title_pt', 30)->nullable ();
+        $t->string ('title_en', 30)->nullable ();
+        $t->string ('lead_pt', 200)->nullable ();
+        $t->string ('lead_en', 200)->nullable ();
+        $t->string ('text_pt', 5000)->nullable ();
+        $t->string ('text_en', 5000)->nullable ();
+        $t->date ('date');
+        $t->string ('image', 60)->nullable ();
+        $t->string ('file', 60)->nullable ();
+        $t->boolean ('enabled')->default (false);
+        $t->index ('date');
+        $t->index ('enabled');
+      });
+      $now = date ('Y-m-d H:i:s');
+      /** @noinspection SqlNoDataSourceInspection */
+      $this->db->connection ()->insert (<<<SQL
       INSERT INTO news (title_en, lead_en, text_en, title_pt, lead_pt, text_pt, date, enabled)
       VALUES (
       'Google announces name of Android update',
@@ -48,6 +64,7 @@ class CreateNews extends AbstractMigration
 
       '$now', 1);
 SQL
-);
+      );
+    }
   }
 }
