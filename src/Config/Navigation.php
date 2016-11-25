@@ -1,5 +1,5 @@
 <?php
-namespace ___NAMESPACE___\Config;
+namespace SeleniaTemplates\DemoApp\Config;
 
 use Electro\Interfaces\Navigation\NavigationInterface;
 use Electro\Interfaces\Navigation\NavigationProviderInterface;
