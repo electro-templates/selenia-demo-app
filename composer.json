@@ -1,5 +1,5 @@
 {
-  "name": "selenia-modules/demo-app-template",
+  "name": "selenia/demo-app-template",
   "description": "Demonstration application made with Selenia",
   "type": "electro-template",
   "keywords": [
@@ -22,8 +22,8 @@
   "homepage": "https://github.com/selenia-modules/demo-app-template",
   "require": {
     "php": ">=5.6",
-    "selenia/platform": "dev-master",
-    "selenia-modules/login": "dev-master"
+    "selenia/platform": "^0.9.0",
+    "selenia-modules/theme-gentelella": "^0.9.0"
   },
   "autoload": {
     "psr-4": {
